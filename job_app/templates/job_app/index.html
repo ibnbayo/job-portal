@@ -1,0 +1,16 @@
+{% extends "job_app/base.html" %}
+{% block content %}
+    {% for advert in adverts %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ advert.title }}</a>
+              {% comment %} <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small> {% endcomment %}
+            </div>
+            {% comment %} <h2><a class="article-title" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2> {% endcomment %}
+            <p class="article-content">{{ advert.description }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
