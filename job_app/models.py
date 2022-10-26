@@ -30,6 +30,8 @@ class JobAdvert(models.Model):
     location = models.CharField(max_length=200)
     job_description = models.CharField(max_length=200)
     is_published = models.BooleanField(default=False)
+    slug = models.SlugField(default='job')
+
 
 class JobApplication(models.Model):
     first_name = models.CharField(max_length=200)
