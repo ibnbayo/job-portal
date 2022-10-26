@@ -29,15 +29,16 @@ class JobAdvert(models.Model):
     description = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     job_description = models.CharField(max_length=200)
+    is_published = models.BooleanField(default=False)
 
 class JobApplication(models.Model):
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     email = models.EmailField(unique=True)
     phone = models.IntegerField()
-    linkedin_url = models.CharField(max_length=100)
-    github_url = models.CharField(max_length=100)
-    website = models.CharField(max_length=200, blank=True, default='N/A')
+    linkedin_url = models.URLField(max_length=100)
+    github_url = models.URLField(max_length=100)
+    website = models.CharField(max_length=200, blank=True, null=True, default='N/A')
     EXPERIENCE_ZERO = '0'
     EXPERIENCE_ONE = '1'
     EXPERIENCE_THREE = '3'
@@ -51,7 +52,7 @@ class JobApplication(models.Model):
         (EXPERIENCE_SEVEN, '7 and above'),
     ]
     years_of_experience = models.CharField(max_length=1, choices=EXPERIENCE_YEARS_CHOICES, default='0')
-    cover_letter = models.CharField(max_length=200, blank=True, default='N/A')
-    job_advert = models.ForeignKey(JobAdvert, on_delete=models.SET_NULL, null=True, blank=True)
+    cover_letter = models.CharField(max_length=200, blank=True, null = True, default='N/A')
+    job_advert = models.ForeignKey(JobAdvert, on_delete=models.CASCADE, default=1)
 
 
