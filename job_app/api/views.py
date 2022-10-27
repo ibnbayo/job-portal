@@ -1,8 +1,8 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from job_app.models import JobAdvert
-from . serializers import JobAdvertSerializer, UserRegistrationSerializer
+from job_app.models import JobAdvert, JobApplication
+from . serializers import JobAdvertSerializer, JobApplicationSerializer, UserRegistrationSerializer
 from django.contrib.auth.models import User
 
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
@@ -11,7 +11,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 @api_view(["GET","POST"])
-def api_list_view(request):
+def adverts_api_list_view(request):
     if request.method == "GET":
         adverts = JobAdvert.objects.all()
         serializer = JobAdvertSerializer(adverts, many = True)
@@ -32,7 +32,7 @@ def api_list_view(request):
     # return Response(serializer.data)
 
 @api_view(["GET"])
-def api_detail_view(request, slug):
+def adverts_api_detail_view(request, slug):
     try:
         advert = JobAdvert.objects.get(slug=slug)
     except JobAdvert.DoesNotExist:
@@ -44,7 +44,7 @@ def api_detail_view(request, slug):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["PUT"])
-def api_update_view(request, slug):
+def adverts_api_update_view(request, slug):
     try:
         advert = JobAdvert.objects.filter(slug=slug).first()
     except JobAdvert.DoesNotExist:
@@ -59,7 +59,7 @@ def api_update_view(request, slug):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["DELETE"])
-def api_delete_view(request, slug):
+def adverts_api_delete_view(request, slug):
     try:
         advert = JobAdvert.objects.get(slug=slug)
     except JobAdvert.DoesNotExist:
@@ -75,7 +75,7 @@ def api_delete_view(request, slug):
         return Response(data=data)
 
 @api_view(['POST'])
-def api_create_user(request):
+def adverts_api_create_user(request):
     if request.method == 'POST':
         serializer = UserRegistrationSerializer(data=request.data)
         if serializer.is_valid():
@@ -106,6 +106,23 @@ class JobAdvertListUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     queryset = JobAdvert.objects.all()
     lookup_field = 'slug'
     serializer_class = JobAdvertSerializer
+
+@api_view(["GET","POST"])
+def applications_api_list_view(request, job_advert):
+    if request.method == "GET":
+        applications = JobApplication.objects.get(job_advert=job_advert)
+        serializer = JobApplicationSerializer(applications, many = True)
+        return Response(serializer.data)
+
+    elif request.method == "POST":
+        user = User.objects.get(pk=1)
+        application = JobApplication(author=user)
+
+        serializer = JobApplicationSerializer(application, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def login(request):
     username = request.POST['username']

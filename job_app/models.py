@@ -26,6 +26,9 @@ class JobAdvert(models.Model):
         (EXPERIENCE_SENIOR, 'Senior level')
     ]
     experience_level = models.CharField(max_length=1, choices=EXPERIENCE_CHOICES, default = 'E')
+    STATUS = (('unpublished','Unpublushed'),
+                ('published','Published'))
+    status = models.CharField(max_length=50, choices=STATUS, default="published")
     description = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     job_description = models.CharField(max_length=200)
@@ -54,7 +57,9 @@ class JobApplication(models.Model):
         (EXPERIENCE_SEVEN, '7 and above'),
     ]
     years_of_experience = models.CharField(max_length=1, choices=EXPERIENCE_YEARS_CHOICES, default='0')
-    cover_letter = models.CharField(max_length=200, blank=True, null = True, default='N/A')
-    job_advert = models.ForeignKey(JobAdvert, on_delete=models.CASCADE, default=1)
+    cover_letter = models.TextField(max_length=200, blank=True, null = True, default='N/A')
+    #The related_name attribute specifies the name of the reverse relation from the User model back to your model.
+    job_advert = models.ForeignKey(JobAdvert, related_name='applications', on_delete=models.CASCADE, default=1)
+    date_added = models.DateTimeField(auto_now=True)
 
 

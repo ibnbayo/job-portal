@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'job_app',
     'account',
     'rest_framework',
+    'rest_framework_simplejwt',
     'djoser',
     'drf_yasg',
 ]

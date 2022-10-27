@@ -1,12 +1,19 @@
 from rest_framework import serializers
 
-from job_app.models import JobAdvert
+from job_app.models import JobAdvert, JobApplication
 from account.models import CustomUser
 
+class JobApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobApplication
+        fields = ['first_name','last_name','email','phone','linkedin_url','github_url','website','years_of_experience','cover_letter','job_advert']
+
 class JobAdvertSerializer(serializers.ModelSerializer):
+    job_applications = JobApplicationSerializer(many=True, source='job_application_set') 
+
     class Meta:
         model = JobAdvert
-        fields = ['title','company_name','employment_type','experience_level','description','location','job_description']
+        fields = '__all__'
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)
