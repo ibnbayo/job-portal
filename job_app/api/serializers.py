@@ -9,7 +9,8 @@ class JobApplicationSerializer(serializers.ModelSerializer):
         fields = ['first_name','last_name','email','phone','linkedin_url','github_url','website','years_of_experience','cover_letter','job_advert']
 
 class JobAdvertSerializer(serializers.ModelSerializer):
-    job_applications = JobApplicationSerializer(many=True, source='job_application_set') 
+    # read_only here has to do with swagger
+    job_applications = JobApplicationSerializer(many=True, read_only=True) 
 
     class Meta:
         model = JobAdvert

@@ -3,13 +3,16 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from job_app.models import JobAdvert, JobApplication
 from . serializers import JobAdvertSerializer, JobApplicationSerializer, UserRegistrationSerializer
-from django.contrib.auth.models import User
+from account.models import CustomUser
 
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.filters import SearchFilter, OrderingFilter
 
+from drf_yasg.utils import swagger_auto_schema
+
+@swagger_auto_schema(method="post", request_body=JobAdvertSerializer())
 @api_view(["GET","POST"])
 def adverts_api_list_view(request):
     if request.method == "GET":
@@ -18,8 +21,9 @@ def adverts_api_list_view(request):
         return Response(serializer.data)
 
     elif request.method == "POST":
-        user = User.objects.get(pk=1)
-        advert = JobAdvert(author=user)
+        user = CustomUser.objects.get(pk=1)
+        advert = JobAdvert()
+        # advert = JobAdvert(author=user)
 
         serializer = JobAdvertSerializer(advert, data=request.data)
         if serializer.is_valid():
@@ -115,7 +119,7 @@ def applications_api_list_view(request, job_advert):
         return Response(serializer.data)
 
     elif request.method == "POST":
-        user = User.objects.get(pk=1)
+        user = CustomUser.objects.get(pk=1)
         application = JobApplication(author=user)
 
         serializer = JobApplicationSerializer(application, data=request.data)
