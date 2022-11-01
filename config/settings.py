@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ibnbayo-job.herokuapp.com']
+ALLOWED_HOSTS = ['ibnbayo-jobs.herokuapp.com']
 
 # Application definition
 
