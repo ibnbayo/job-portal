@@ -158,7 +158,7 @@ EMAIL_PORT = 587
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True 
 
-DEFAULT_FROM_EMAIL = f'Desmond from {SITE_NAME} <noreply@{DOMAIN}>'
+DEFAULT_FROM_EMAIL = f'Abdullahi from {SITE_NAME} <noreply@{DOMAIN}>'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
