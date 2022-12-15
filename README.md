@@ -30,7 +30,7 @@ User
 - Username or email
 - password
 
-Specifications
+#Specifications
 - API endpoint to login and logout users 
 - API endpoint that returns a list of Job adverts in the DB. 
 - API endpoint that retrieves the detail of a job advert
@@ -42,7 +42,7 @@ Specifications
 - API endpoint to submit a Job application for a job advert
 - API endpoint to delete a Job Application
 
-Requirements
+#Requirements
 - Users signup and activate their account
 - Job Advert can only be deleted only after it has been unpublished
 - Job Advert can be published and unpublished.
