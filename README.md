@@ -8,7 +8,7 @@ Live Link: [jobs-portal.up.railway.app/docs/]
 
 ## Features
 
-Job Advert
+# Job Advert
 - Title
 - Company name
 - Employment type (full-time, contract, remote, part-time)
@@ -16,7 +16,8 @@ Job Advert
 - Description
 - Location
 - Job description
-Job Application
+
+# Job Application
 - First name
 - Last name
 - Email address
@@ -26,11 +27,12 @@ Job Application
 - Website (optional)
 - Years of experience (0 - 1, 1 - 2, 3 - 4, 5 - 6, 7 and above)
 - Cover letter (Should be optional and can be a CharField)
-User
+
+# User
 - Username or email
 - password
 
-#Specifications
+# Specifications
 - API endpoint to login and logout users 
 - API endpoint that returns a list of Job adverts in the DB. 
 - API endpoint that retrieves the detail of a job advert
@@ -42,7 +44,7 @@ User
 - API endpoint to submit a Job application for a job advert
 - API endpoint to delete a Job Application
 
-#Requirements
+# Requirements
 - Users signup and activate their account
 - Job Advert can only be deleted only after it has been unpublished
 - Job Advert can be published and unpublished.
