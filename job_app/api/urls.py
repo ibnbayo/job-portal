@@ -10,6 +10,8 @@ urlpatterns = [
     path("update/<slug:slug>", adverts_api_update_view, name="update2"),
     path("delete/<slug:slug>/", adverts_api_delete_view, name="delete2"),
     path("register/", adverts_api_create_user, name="register"),
+    path("applications/", applications_api_list_view, name="applications"),
+
     # path("<job_advert:job_advert>/applications/", applications_api_list_view, name="applist"),
     path("login", obtain_auth_token, name="login"),
 ]

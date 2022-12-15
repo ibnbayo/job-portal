@@ -1,31 +1,35 @@
 from email.policy import default
 from django.db import models
+from django.urls import reverse
+# from django.db.models import CharField, Model
+from autoslug import AutoSlugField
+
 
 # Create your models here.
 
 class JobAdvert(models.Model):
     title = models.CharField(max_length = 200)
     company_name = models.CharField(max_length = 200)
-    EMPLOYMENT_FULLTIME = 'F'
-    EMPLOYMENT_CONTRACT = 'C'
-    EMPLOYMENT_REMOTE = 'R'
-    EMPLOYMENT_PARTTIME = 'P'
+    EMPLOYMENT_FULLTIME = 'Full'
+    EMPLOYMENT_CONTRACT = 'Contract'
+    EMPLOYMENT_REMOTE = 'Remote'
+    EMPLOYMENT_PARTTIME = 'Part'
     EMPLOYMENT_CHOICES = [
         (EMPLOYMENT_FULLTIME, 'Full-time'),
         (EMPLOYMENT_CONTRACT, 'Contract'),
         (EMPLOYMENT_REMOTE, 'Remote'),
         (EMPLOYMENT_PARTTIME, 'Part-time')
     ]
-    employment_type = models.CharField(max_length=1, choices=EMPLOYMENT_CHOICES, default = 'F')
-    EXPERIENCE_ENTRY = 'E'
-    EXPERIENCE_MID = 'M'
-    EXPERIENCE_SENIOR = 'S'
+    employment_type = models.CharField(max_length=20, choices=EMPLOYMENT_CHOICES, default = 'Full-time')
+    EXPERIENCE_ENTRY = 'Entry'
+    EXPERIENCE_MID = 'Mid'
+    EXPERIENCE_SENIOR = 'Senior'
     EXPERIENCE_CHOICES = [
         (EXPERIENCE_ENTRY, 'Entry level'),
         (EXPERIENCE_MID, 'Mid level'),
         (EXPERIENCE_SENIOR, 'Senior level')
     ]
-    experience_level = models.CharField(max_length=1, choices=EXPERIENCE_CHOICES, default = 'E')
+    experience_level = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, default = 'Entry')
     STATUS = (('unpublished','Unpublushed'),
                 ('published','Published'))
     status = models.CharField(max_length=50, choices=STATUS, default="published")
@@ -33,7 +37,13 @@ class JobAdvert(models.Model):
     location = models.CharField(max_length=200)
     job_description = models.CharField(max_length=200)
     is_published = models.BooleanField(default=False)
-    slug = models.SlugField(default='job')
+    slug = AutoSlugField(populate_from='title')
+    # slug = models.SlugField(default='job')
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("advert_detail", kwargs={"slug": self.slug})
 
 
 class JobApplication(models.Model):
