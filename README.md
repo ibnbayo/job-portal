@@ -43,21 +43,17 @@ Specifications
 - API endpoint to delete a Job Application
 
 Requirements
-Below are the requirements of the application:
-- Users can signup and activate their account
-- Only the endpoint that returns the list of published job adverts and allows the
-applicants to submit a Job Application should be accessible to guest users. Other
-endpoints should require authentication.
-- A Job Advert can only be deleted only after it has been unpublished
-- A Job Advert can be published and unpublished.
-- Job Applications can only be submitted for a Job advert that has been published.
-- Guest users can only see published job adverts.
-- All the DB queries should be made with Django ORM.
+- Users signup and activate their account
+- Job Advert can only be deleted only after it has been unpublished
+- Job Advert can be published and unpublished.
+- Job Applications can only be submitted for job adverts that has been published.
+- All database queries made with Django ORM.
 
 
 ## Technologies 
 - Django
 - REST Framework
+- Oauthlib
 
 
 ## Running The Project
@@ -72,4 +68,5 @@ From the repo:<br/>
 ## To Do
 - Add applicant count and publish status to job advert response. Published adverts should come first followed by
 adverts with the highest applicant count and then recently created adverts.
+- Allow guest users access to only published job adverts.
 
