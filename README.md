@@ -3,7 +3,7 @@
 
 ## Overview
 Job Portal API featuring job adverts and applications.
-Live Link: [jobs-portal.up.railway.app/docs/]
+Live Link: [https://jobs-portal.up.railway.app/docs/]
 
 
 ## Features
@@ -60,7 +60,7 @@ Live Link: [jobs-portal.up.railway.app/docs/]
 
 ## Running The Project
 Live version:
-[Job Portal](jobs-portal.up.railway.app/docs/)
+[Job Portal](https://jobs-portal.up.railway.app/docs/)
 
 From the repo:<br/>
   - Clone this project locally<br/>
