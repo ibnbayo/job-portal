@@ -26,7 +26,7 @@ SECRET_KEY = 'jirinr123948nfdjri4885k5jf'#os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web-production-3579.up.railway.app','ibnbayo-jobs.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['jobs-portal.up.railway.app','web-production-3579.up.railway.app','ibnbayo-jobs.herokuapp.com','127.0.0.1']
 
 # Application definition
 
